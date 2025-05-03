@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:tomatooo_app/Constants.dart';
+import 'package:tomatooo_app/Screens/Profile_Page.dart';
 
 import 'package:tomatooo_app/Screens/homepage.dart';
 import 'package:tomatooo_app/Screens/Scan_Track_Tomato.dart';
@@ -51,16 +52,6 @@ class _TomatoFruitTrackingState extends State<TomatoFruitTracking>
   ];
 
   int _currentIndex = 0;
-  // final _screens = [
-  //   ScanTrackTomato(),
-  //   HomePage(),
-  //   Center(child: Text('Re page')),
-  // ];
-  final List<Widget> widgitList = [
-    ScanTrackTomato(),
-    HomePage(),
-    Center(child: Text('Re page')),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +86,6 @@ class _TomatoFruitTrackingState extends State<TomatoFruitTracking>
                 decoration: BoxDecoration(
                   color: Color(0xffF4F4F5),
                   borderRadius: BorderRadius.circular(10),
-
                 ),
                 child: TabBar(
                   dividerColor: Color(0xffF4F4F5),
@@ -146,23 +136,31 @@ class _TomatoFruitTrackingState extends State<TomatoFruitTracking>
           ],
         ),
       ),
-      // bottomSheet: widgitList[_currentIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(35),
-          color: Color(0xff282F3C),
+          color: const Color(0xff282F3C),
         ),
-        margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
+        margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
         child: SalomonBottomBar(
           curve: Curves.ease,
-          margin: EdgeInsets.all(10),
-          duration: Duration(seconds: 1),
+          margin: const EdgeInsets.all(10),
+          duration: const Duration(milliseconds: 300),
           items: _items,
           currentIndex: _currentIndex,
           onTap: (index) {
             setState(() {
               _currentIndex = index;
             });
+
+            // Navigation logic
+            if (index == 0) {
+              Navigator.pushReplacementNamed(context, ScanTrackTomato.id);
+            } else if (index == 1) {
+              Navigator.pushReplacementNamed(context, HomePage.id);
+            } else if (index == 2) {
+              Navigator.pushReplacementNamed(context, ProfilePage.id);
+            }
           },
         ),
       ),

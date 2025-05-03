@@ -315,11 +315,13 @@ class ScanResultsLeaf extends StatelessWidget {
                                       }
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.deepPurple,
-                                      foregroundColor: Colors.white,
-                                      padding: const EdgeInsets.symmetric(vertical: 12,horizontal: 80),
+                                      backgroundColor: Colors.white,
+                                      foregroundColor: Colors.black,
+                                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 80),
+                                      elevation: 0, // This removes the shadow
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),
+                                        side: BorderSide(color: Colors.green), // This adds the outline border
                                       ),
                                     ),
                                     child: const Text(
@@ -351,7 +353,7 @@ class ScanResultsLeaf extends StatelessWidget {
                     }
                 );
               },
-              icon: const Icon(Icons.more_vert, color: Colors.black)
+              icon: const Icon(Icons.report_gmailerrorred_outlined, color: Colors.black)
           ),
         ]
       ),

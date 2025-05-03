@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:tomatooo_app/Constants.dart';
 import 'package:tomatooo_app/Screens/ScanResultsLeaf.dart';
 import 'package:tomatooo_app/Screens/Tomato_Fruit_Tracking.dart';
@@ -10,11 +11,53 @@ import 'package:tomatooo_app/widgets/Custom_Button_icon.dart';
 import 'package:tomatooo_app/widgets/Custom_Container_widget.dart';
 import 'package:http_parser/http_parser.dart';
 
-class ScanTrackTomato extends StatelessWidget {
+class ScanTrackTomato extends StatefulWidget {
   const ScanTrackTomato({super.key});
   static String id = 'Scan';
 
-  // -------------------------- Leaf Tomato----------------------------------
+  State<ScanTrackTomato> createState() => _ScanTrackTomatoState();
+}
+
+class _ScanTrackTomatoState extends State<ScanTrackTomato>
+    with TickerProviderStateMixin {
+  late TabController tabController;
+
+  int _currentIndex = 0;
+
+  @override
+  void initState() {
+    tabController = TabController(length: 2, vsync: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
+  final _items = [
+    SalomonBottomBarItem(
+      icon: Icon(Icons.house_outlined),
+      title: Text('Home'),
+      selectedColor: Colors.white,
+      unselectedColor: Colors.grey,
+    ),
+    SalomonBottomBarItem(
+      icon: Icon(Icons.shopping_cart_outlined),
+      title: Text('Shopping'),
+      selectedColor: Colors.white,
+      unselectedColor: Colors.grey,
+    ),
+    SalomonBottomBarItem(
+      icon: Icon(Icons.person_outlined),
+      title: Text('Person'),
+      selectedColor: Colors.white,
+      unselectedColor: Colors.grey,
+    ),
+  ];
+
+  // -------------------------- Leaf Tomato---------------------------------------------------------
   Future<void> _takePhoto(BuildContext context) async {
     try {
       final ImagePicker picker = ImagePicker();
@@ -93,7 +136,7 @@ class ScanTrackTomato extends StatelessWidget {
       );
     }
   }
-
+// -------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(

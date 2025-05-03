@@ -4,6 +4,9 @@ import 'package:tomatooo_app/Constants.dart';
 import 'package:tomatooo_app/widgets/OnTab_Tomato_Market_Two.dart';
 import 'package:tomatooo_app/widgets/OnTab_Tomato_Market_one.dart';
 
+import 'Profile_Page.dart';
+import 'homepage.dart';
+
 class TomatoMarketplace extends StatefulWidget {
   const TomatoMarketplace({super.key});
   static String id = 'TomatoMarketPlace';
@@ -161,19 +164,29 @@ class _TomatoMarketplaceState extends State<TomatoMarketplace>
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(35),
-          color: Color(0xff282F3C),
+          color: const Color(0xff282F3C),
         ),
-        margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
+        margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
         child: SalomonBottomBar(
           curve: Curves.ease,
-          margin: EdgeInsets.all(10),
-          duration: Duration(seconds: 1),
+          margin: const EdgeInsets.all(10),
+          duration: const Duration(milliseconds: 300),
           items: _items,
           currentIndex: _currentIndex,
           onTap: (index) {
             setState(() {
               _currentIndex = index;
             });
+
+            // Navigation logic
+            if (index == 0) {
+              Navigator.pushReplacementNamed(context, TomatoMarketplace.id);
+            } else if (index == 1) {
+              Navigator.maybePop(context, HomePage.id);
+            } else if (index == 2) {
+              Navigator.pushReplacementNamed(context, ProfilePage.id);
+
+            }
           },
         ),
       ),

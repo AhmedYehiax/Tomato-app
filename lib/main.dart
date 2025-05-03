@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // return MaterialApp(
     //   debugShowCheckedModeBanner: false,
-    //   home:  ScanResultsLeaf(className: 'null', confidence: 60, imageBytes: null,),
+    //   home:  ScanResultFruit(className: 'null', confidence: '90%',),
     // );
     return MaterialApp(
       debugShowCheckedModeBanner: false,

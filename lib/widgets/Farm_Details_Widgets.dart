@@ -12,93 +12,9 @@ import 'package:http_parser/http_parser.dart';
 class FarmDetailsWidgets extends StatelessWidget {
   const FarmDetailsWidgets({super.key});
   final String img = 'assets/Images/download.jpg';
-  
-
-// -------------------------- Leaf Tomato----------------------------------
-//   Future<void> _takePhoto(BuildContext context) async {
-//     try {
-//       final ImagePicker picker = ImagePicker();
-//       final XFile? photo = await picker.pickImage(
-//         source: ImageSource.camera,
-//         imageQuality: 85,
-//         maxWidth: 1200,
-//       );
-//
-//       if (photo == null) return;
-//
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         const SnackBar(content: Text('Analyzing tomato...')),
-//       );
-//
-//       final bytes = await photo.readAsBytes();
-//       var request = http.MultipartRequest(
-//         'POST',
-//         Uri.parse('https://8d68-35-197-64-131.ngrok-free.app/predict'),
-//       );
-//
-//       request.files.add(http.MultipartFile.fromBytes(
-//         'file',
-//         bytes,
-//         contentType: MediaType("image", "jpg"),
-//         filename: 'tomato_${DateTime.now().millisecondsSinceEpoch}.jpg',
-//       ));
-//
-//       var response = await request.send();
-//
-//       if (response.statusCode == 200) {
-//         final jsonResponse = await response.stream.bytesToString();
-//         final resultList = json.decode(jsonResponse) as List;
-//
-//         if (resultList.isNotEmpty) {
-//           final result = resultList.first;
-//
-//           showDialog(
-//             context: context,
-//             builder: (ctx) => AlertDialog(
-//               title: const Text("Analysis Results"),
-//               content: Column(
-//                 mainAxisSize: MainAxisSize.min,
-//                 children: [
-//                   _buildResultRow("Class", result['class_name']?.toString() ?? 'N/A'),
-//                   _buildResultRow("Confidence",
-//                       "${(result['confidence']*100 ?? 0).toStringAsFixed(2)}%"),
-//                   _buildResultRow("Bounding Box",
-//                       "X1: ${result['bbox'][0] ?? 0}, Y1: ${result['bbox'][1] ?? 0}\n"
-//                           "X2: ${result['bbox'][2] ?? 0}, Y2: ${result['bbox'][3] ?? 0}")
-//                 ],
-//               ),
-//             ),
-//           );
-//         }
-//       } else {
-//         throw Exception('Server error: ${response.statusCode}');
-//       }
-//     } catch (e, stackTrace) {
-//       print('Error: $e\n$stackTrace');
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         SnackBar(content: Text('Error: ${e.toString()}')),
-//       );
-//     }
-//   }
-//
-//
-  // Widget _buildResultRow(String label, String value) {
-  //   return Padding(
-  //     padding: const EdgeInsets.symmetric(vertical: 4),
-  //     child: Row(
-  //       children: [
-  //         Text("$label: ", style: const TextStyle(fontWeight: FontWeight.bold)),
-  //         Text(value),
-  //       ],
-  //     ),
-  //   );
-  // }
 
 
-//---------------------------------------------------------------------------------------------
 //-------------------------------Tomato fruit--------------------------------------
-
-
   Future<void> _takePhoto(BuildContext context) async {
     try {
       final ImagePicker picker = ImagePicker();
@@ -148,7 +64,7 @@ class FarmDetailsWidgets extends StatelessWidget {
       );
     }
   }
-
+  // ------------------------------------------------------------------------------------------
 
   @override
   Widget build(BuildContext context) {

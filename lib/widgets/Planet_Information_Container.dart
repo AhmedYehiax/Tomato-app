@@ -116,27 +116,6 @@ class _PlanetInformationContainerState
           ),
           const SizedBox(height: 20),
 
-          // Field Location (Country Picker)
-          const Text('Field Location'),
-          const SizedBox(height: 8),
-          GestureDetector(
-            onTap: _pickCountry,
-            child: AbsorbPointer(
-              child: TextField(
-                controller: TextEditingController(text: _selectedCountry ?? ''),
-                decoration: InputDecoration(
-                  hintText: 'Select country',
-                  suffixIcon: const Icon(Icons.arrow_drop_down),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-
-          // Notes
           const Text('Notes'),
           const SizedBox(height: 8),
           TextField(
