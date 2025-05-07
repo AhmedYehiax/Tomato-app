@@ -1,0 +1,46 @@
+name: tomatooo_app
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  font_awesome_flutter: ^10.8.0
+  salomon_bottom_bar: ^3.3.2
+  bottom_navy_bar: ^6.1.0
+  camera: ^0.11.1
+  permission_handler: ^11.0.1
+  image_picker: ^1.1.2
+  path: ^1.9.1
+  country_picker: ^2.0.27
+  flutter_launcher_icons: ^0.14.3 # Updated package name and version
+  url_launcher: ^6.1.11
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/Images/
+    - assets/Images/Farms/
+
+  fonts:
+    - family: Geist
+      fonts:
+        - asset: assets/Fonts/Geist-Regular.ttf
+
+# Add this new section for flutter_launcher_icons configuration
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/Images/logo.png"
