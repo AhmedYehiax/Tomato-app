@@ -1,10 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:tomatooo_app/Constants.dart';
+import 'package:tomatooo_app/Models/Farms_Models.dart';
 import 'package:tomatooo_app/widgets/Farm_Details_Widgets.dart';
 
-class FarmDetails extends StatelessWidget {
+class FarmDetails extends StatefulWidget {
   const FarmDetails({super.key});
   static String id = 'FarmDetails';
+
+  @override
+  State<FarmDetails> createState() => _FarmDetailsState();
+}
+
+class _FarmDetailsState extends State<FarmDetails> {
+  bool isFavorite = false;
+  Farms? farm;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)?.settings.arguments;
+    if (args is Farms) {
+      farm = args;
+      isFavorite = farm!.isFavorite;
+    }
+  }
+
+  void _toggleFavorite() {
+    setState(() {
+      isFavorite = !isFavorite;
+      if (farm != null) {
+        farm!.isFavorite = isFavorite;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +45,7 @@ class FarmDetails extends StatelessWidget {
         foregroundColor: kPraimryTextTwoColor,
         title: Center(
           child: Text(
-            'Farm Details',
+            farm?.name ?? 'Farm Details',
             style: TextStyle(
               fontFamily: kFontFamily,
               fontSize: 24,
@@ -29,11 +57,17 @@ class FarmDetails extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.favorite_border_outlined),
+            child: GestureDetector(
+              onTap: _toggleFavorite,
+              child: Icon(
+                isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
+                color: isFavorite ? Colors.red : null,
+              ),
+            ),
           ),
         ],
       ),
-      body: FarmDetailsWidgets(),
+      body: FarmDetailsWidgets(farm: farm),
     );
   }
 }

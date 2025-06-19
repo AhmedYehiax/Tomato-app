@@ -13,6 +13,7 @@ class FarmFavoriteManager {
     if (!_favoriteFarms.any((element) => element.name == farm.name)) {
       farm.isFavorite = true;
       _favoriteFarms.add(farm);
+
     }
   }
 

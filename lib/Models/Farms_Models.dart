@@ -1,4 +1,4 @@
-class Farms{
+class Farms {
   final String name;
   final String location;
   final String discription;
@@ -14,5 +14,4 @@ class Farms{
     required this.rating,
     this.isFavorite = false,
   });
-
 }

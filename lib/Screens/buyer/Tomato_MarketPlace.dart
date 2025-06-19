@@ -80,7 +80,7 @@ class _TomatoMarketplaceState extends State<TomatoMarketplace>
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
-            SearchBar(),
+            
             SizedBox(height: 10),
             Row(
               children: [
@@ -181,7 +181,6 @@ class _TomatoMarketplaceState extends State<TomatoMarketplace>
               Navigator.maybePop(context, HomePage.id);
             } else if (index == 2) {
               Navigator.pushReplacementNamed(context, ProfilePage.id);
-
             }
           },
         ),
@@ -190,37 +189,37 @@ class _TomatoMarketplaceState extends State<TomatoMarketplace>
   }
 }
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({super.key});
+// class SearchBar extends StatelessWidget {
+//   const SearchBar({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 18),
-      child: Container(
-        child: TextField(
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.all(15),
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(50),
-            ),
-            filled: true,
-            fillColor: Color(0xffFFFCFC),
-            hintText: 'Search farms by name...',
-            hintStyle: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: Colors.grey,
-            ),
-            prefixIcon: Icon(
-              Icons.search_sharp,
-              size: 25,
-              color: const Color.fromARGB(255, 236, 85, 74),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.only(top: 18),
+//       child: Container(
+//         child: TextField(
+//           decoration: InputDecoration(
+//             contentPadding: EdgeInsets.all(15),
+//             border: OutlineInputBorder(
+//               borderSide: BorderSide.none,
+//               borderRadius: BorderRadius.circular(50),
+//             ),
+//             filled: true,
+//             fillColor: Color(0xffFFFCFC),
+//             hintText: 'Search farms by name...',
+//             hintStyle: TextStyle(
+//               fontSize: 14,
+//               fontWeight: FontWeight.w400,
+//               color: Colors.grey,
+//             ),
+//             prefixIcon: Icon(
+//               Icons.search_sharp,
+//               size: 25,
+//               color: const Color.fromARGB(255, 236, 85, 74),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

@@ -29,14 +29,16 @@ class CustomContainerTomatoFruitTracking extends StatefulWidget {
   final int days;
   final int growthStage;
   final String growthStageName;
-  final Function(int stage, String stageName, int daysToHarvest)? onGrowthStageUpdate;
-
+  final Function(int stage, String stageName, int daysToHarvest)?
+  onGrowthStageUpdate;
 
   @override
-  State<CustomContainerTomatoFruitTracking> createState() => _CustomContainerTomatoFruitTrackingState();
+  State<CustomContainerTomatoFruitTracking> createState() =>
+      _CustomContainerTomatoFruitTrackingState();
 }
 
-class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerTomatoFruitTracking> {
+class _CustomContainerTomatoFruitTrackingState
+    extends State<CustomContainerTomatoFruitTracking> {
   late int currentStage;
   late String currentStageName;
   late int daysToHarvest;
@@ -73,12 +75,14 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
         Uri.parse('https://${AppUri.uriFarmer}/predict_fruit'),
       );
 
-      request.files.add(http.MultipartFile.fromBytes(
-        'file',
-        bytes,
-        contentType: MediaType("image", "jpg"),
-        filename: 'tomato_${DateTime.now().millisecondsSinceEpoch}.jpg',
-      ));
+      request.files.add(
+        http.MultipartFile.fromBytes(
+          'file',
+          bytes,
+          contentType: MediaType("image", "jpg"),
+          filename: 'tomato_${DateTime.now().millisecondsSinceEpoch}.jpg',
+        ),
+      );
 
       var response = await request.send();
 
@@ -101,21 +105,21 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
           final detection = detections.first;
           final className = detection["class_name"]?.toString() ?? "Unknown";
           _updateGrowthStageFromDetection(className);
-
         } else {
           // No detections - don't update the image
           showDialog(
             context: context,
-            builder: (context) => AlertDialog(
-              title: const Text("No Detection"),
-              content: const Text("No tomatoes detected in the image."),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text("OK"),
+            builder:
+                (context) => AlertDialog(
+                  title: const Text("No Detection"),
+                  content: const Text("No tomatoes detected in the image."),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text("OK"),
+                    ),
+                  ],
                 ),
-              ],
-            ),
           );
         }
       } else {
@@ -123,9 +127,9 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
       }
     } catch (e, stackTrace) {
       print('Error: $e\n$stackTrace');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: ${e.toString()}')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error: ${e.toString()}')));
     } finally {
       setState(() {
         _isLoading = false;
@@ -233,28 +237,32 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-            'Update Growth Stage',
-            style: TextStyle(
-              fontFamily: kFontFamily,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildStageOption('Plant Set', 1, 20),
-              _buildStageOption('Flowering', 2, 40),
-              _buildStageOption('Fruit Set', 3, 60),
-              _buildStageOption('Ripening', 4, 80),
-              _buildStageOption('Harvesting', 5, 100),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text('Cancel'),
+        return ListView(
+          children: [
+            AlertDialog(
+              title: Text(
+                'Update Growth Stage',
+                style: TextStyle(
+                  fontFamily: kFontFamily,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _buildStageOption('Plant Set', 1, 20),
+                  _buildStageOption('Flowering', 2, 40),
+                  _buildStageOption('Fruit Set', 3, 60),
+                  _buildStageOption('Ripening', 4, 80),
+                  _buildStageOption('Harvesting', 5, 100),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text('Cancel'),
+                ),
+              ],
             ),
           ],
         );
@@ -281,14 +289,16 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
         padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         margin: EdgeInsets.only(bottom: 8),
         decoration: BoxDecoration(
-          color: widget.growthStageName == stageName
-              ? kPraimaryColor.withOpacity(0.1)
-              : Colors.grey.withOpacity(0.1),
+          color:
+              widget.growthStageName == stageName
+                  ? kPraimaryColor.withOpacity(0.1)
+                  : Colors.grey.withOpacity(0.1),
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: widget.growthStageName == stageName
-                ? kPraimaryColor
-                : Colors.transparent,
+            color:
+                widget.growthStageName == stageName
+                    ? kPraimaryColor
+                    : Colors.transparent,
             width: 1,
           ),
         ),
@@ -298,7 +308,10 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
               widget.growthStageName == stageName
                   ? Icons.check_circle
                   : Icons.circle_outlined,
-              color: widget.growthStageName == stageName ? kPraimaryColor : Colors.grey,
+              color:
+                  widget.growthStageName == stageName
+                      ? kPraimaryColor
+                      : Colors.grey,
             ),
             SizedBox(width: 12),
             Expanded(
@@ -351,51 +364,54 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start, // Changed to better distribute space
+            mainAxisAlignment:
+                MainAxisAlignment.start, // Changed to better distribute space
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _isLoading
                       ? Container(
-                    width: 80,
-                    height: 150,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  )
+                        width: 80,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Center(child: CircularProgressIndicator()),
+                      )
                       : decodedImage != null
                       ? Container(
-                    width: 80,
-                    height: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(
-                        image: decodedImage!,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  )
+                        width: 80,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          image: DecorationImage(
+                            image: decodedImage!,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      )
                       : widget.image.isNotEmpty
                       ? Image.asset(widget.image, width: 80, height: 150)
                       : Container(
-                    width: 80,
-                    height: 150,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Icon(Icons.image_not_supported, color: Colors.grey[400]),
-                  ),
+                        width: 80,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Icon(
+                          Icons.image_not_supported,
+                          color: Colors.grey[400],
+                        ),
+                      ),
                   SizedBox(width: 10),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start, // Better text alignment
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start, // Better text alignment
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -408,7 +424,9 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
                                   fontSize: 17,
                                   fontWeight: FontWeight.w700,
                                 ),
-                                overflow: TextOverflow.ellipsis, // Prevent text overflow
+                                overflow:
+                                    TextOverflow
+                                        .ellipsis, // Prevent text overflow
                               ),
                             ),
                             Text(
@@ -438,7 +456,9 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
                                   fontWeight: FontWeight.w400,
                                   color: Colors.grey,
                                 ),
-                                overflow: TextOverflow.ellipsis, // Prevent text overflow
+                                overflow:
+                                    TextOverflow
+                                        .ellipsis, // Prevent text overflow
                               ),
                             ),
                           ],
@@ -478,7 +498,9 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
                         SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start, // Align to top for better layout
+                          crossAxisAlignment:
+                              CrossAxisAlignment
+                                  .start, // Align to top for better layout
                           children: [
                             Expanded(
                               flex: 3,
@@ -491,15 +513,20 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
                                   color: Colors.grey,
                                 ),
                                 maxLines: 2, // Limit to 2 lines
-                                overflow: TextOverflow.ellipsis, // Add ellipsis for overflow
+                                overflow:
+                                    TextOverflow
+                                        .ellipsis, // Add ellipsis for overflow
                               ),
                             ),
                             SizedBox(width: 8),
                             Column(
-                              crossAxisAlignment: CrossAxisAlignment.end, // Right-align days info
+                              crossAxisAlignment:
+                                  CrossAxisAlignment
+                                      .end, // Right-align days info
                               children: [
                                 Row(
-                                  mainAxisSize: MainAxisSize.min, // Take minimum space
+                                  mainAxisSize:
+                                      MainAxisSize.min, // Take minimum space
                                   children: [
                                     Icon(
                                       FontAwesomeIcons.clock,
@@ -508,7 +535,8 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
                                     ),
                                     SizedBox(width: 5),
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           widget.days == 0
@@ -555,7 +583,9 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
                         color: Colors.white,
                         IconData: Icons.camera_alt_outlined,
                         iconColor: Colors.black,
-                        width: MediaQuery.of(context).size.width * 0.4, // Proportional width
+                        width:
+                            MediaQuery.of(context).size.width *
+                            0.4, // Proportional width
                         height: 45,
                         fontsize: 14.2,
                         iconsize: 17,
@@ -570,7 +600,9 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
                       borderRadius: BorderRadius.circular(10),
                       title: 'Update Status',
                       color: kPraimaryColor,
-                      width: MediaQuery.of(context).size.width * 0.4, // Proportional width
+                      width:
+                          MediaQuery.of(context).size.width *
+                          0.4, // Proportional width
                       height: 45,
                       fontsize: 14.2,
                       onPressed: _showGrowthStageUpdateDialog,
