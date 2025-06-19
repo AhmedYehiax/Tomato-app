@@ -77,14 +77,12 @@ class _ScanTrackTomatoState extends State<ScanTrackTomato>
         Uri.parse('https://${AppUri.uriFarmer}/predict_leaf'),
       );
 
-      request.files.add(
-        http.MultipartFile.fromBytes(
-          'file',
-          bytes,
-          contentType: MediaType("image", "jpg"),
-          filename: 'tomato_${DateTime.now().millisecondsSinceEpoch}.jpg',
-        ),
-      );
+      request.files.add(http.MultipartFile.fromBytes(
+        'file',
+        bytes,
+        contentType: MediaType("image", "jpg"),
+        filename: 'tomato_${DateTime.now().millisecondsSinceEpoch}.jpg',
+      ));
 
       var response = await request.send();
 
@@ -108,30 +106,26 @@ class _ScanTrackTomatoState extends State<ScanTrackTomato>
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder:
-                  (context) => ScanResultsLeaf(
-                    className: className,
-                    confidence: confidence,
-                    imageBytes: decodedImage,
-                  ),
+              builder: (context) => ScanResultsLeaf(
+                className: className,
+                confidence: confidence,
+                imageBytes: decodedImage,
+              ),
             ),
           );
         } else {
           showDialog(
             context: context,
-            builder:
-                (context) => AlertDialog(
-                  title: const Text("No Detection"),
-                  content: const Text(
-                    "No diseases were detected in the image.",
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text("OK"),
-                    ),
-                  ],
+            builder: (context) => AlertDialog(
+              title: const Text("No Detection"),
+              content: const Text("No diseases were detected in the image."),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text("OK"),
                 ),
+              ],
+            ),
           );
         }
       } else {
@@ -139,13 +133,12 @@ class _ScanTrackTomatoState extends State<ScanTrackTomato>
       }
     } catch (e, stackTrace) {
       print('Error: $e\n$stackTrace');
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Error: ${e.toString()}')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: ${e.toString()}')),
+      );
     }
   }
-
-  // -------------------------------------------------------------------------
+// -------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -199,38 +192,35 @@ class _ScanTrackTomatoState extends State<ScanTrackTomato>
                       ),
                     ],
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomContainerWidget(
-                          title: 'Detect Tomato Disease',
-                          subtitle:
-                              'Take a photo of your tomato plant leaves to identify potential diseases and get treatment recommendations',
-                          IconData: FontAwesomeIcons.leaf,
-                          color: Colors.black,
-                          backgroundColor: const Color(0xffDCFCE7),
-                          iconColor: kPraimaryColor,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomContainerWidget(
+                        title: 'Detect Tomato Disease',
+                        subtitle:
+                        'Take a photo of your tomato plant leaves to identify potential diseases and get treatment recommendations',
+                        IconData: FontAwesomeIcons.leaf,
+                        color: Colors.black,
+                        backgroundColor: const Color(0xffDCFCE7),
+                        iconColor: kPraimaryColor,
+                      ),
+                      const SizedBox(height: 20),
+                      GestureDetector(
+                        onTap: () => _takePhoto(context),
+                        child: CustomButtonIcon(
+                          fontcolor: Colors.white,
+                          border: Border.all(width: 0, color: Colors.grey),
+                          fontsize: 16,
+                          iconsize: 20,
+                          width: 340,
+                          height: 60,
+                          title: 'Scan Plant Leaves',
+                          color: kPraimaryColor,
+                          IconData: Icons.camera_alt_outlined,
+                          iconColor: Colors.white,
                         ),
-                        const SizedBox(height: 20),
-                        GestureDetector(
-                          onTap: () => _takePhoto(context),
-                          child: CustomButtonIcon(
-                            fontcolor: Colors.white,
-                            border: Border.all(width: 0, color: Colors.grey),
-                            fontsize: 16,
-                            iconsize: 20,
-                            width: 340,
-                            height: 60,
-                            title: 'Scan Plant Leaves',
-                            color: kPraimaryColor,
-                            IconData: Icons.camera_alt_outlined,
-                            iconColor: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 26),
@@ -249,43 +239,37 @@ class _ScanTrackTomatoState extends State<ScanTrackTomato>
                       ),
                     ],
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomContainerWidget(
-                          title: 'Tomato Fruit Follow-up',
-                          subtitle:
-                              'Monitor your tomato fruit growth, track quality metrics, and record harvest data',
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomContainerWidget(
+                        title: 'Tomato Fruit Follow-up',
+                        subtitle:
+                        'Monitor your tomato fruit growth, track quality metrics, and record harvest data',
+                        IconData: Icons.show_chart,
+                        color: Colors.black,
+                        backgroundColor: const Color(0xffDCFCE7),
+                        iconColor: kPraimaryColor,
+                      ),
+                      const SizedBox(height: 20),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, TomatoFruitTracking.id);
+                        },
+                        child: CustomButtonIcon(
+                          fontcolor: Colors.white,
+                          border: Border.all(width: 0, color: Colors.grey),
+                          fontsize: 16,
+                          iconsize: 18,
+                          width: 340,
+                          height: 60,
+                          title: 'Track Fruit Development',
+                          color: kPraimaryColor,
                           IconData: Icons.show_chart,
-                          color: Colors.black,
-                          backgroundColor: const Color(0xffDCFCE7),
-                          iconColor: kPraimaryColor,
+                          iconColor: Colors.white,
                         ),
-                        const SizedBox(height: 20),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              TomatoFruitTracking.id,
-                            );
-                          },
-                          child: CustomButtonIcon(
-                            fontcolor: Colors.white,
-                            border: Border.all(width: 0, color: Colors.grey),
-                            fontsize: 16,
-                            iconsize: 18,
-                            width: 340,
-                            height: 60,
-                            title: 'Track Fruit Development',
-                            color: kPraimaryColor,
-                            IconData: Icons.show_chart,
-                            iconColor: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 24),

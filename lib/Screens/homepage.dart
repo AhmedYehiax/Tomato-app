@@ -6,6 +6,7 @@ import 'package:tomatooo_app/widgets/Custom_Container_widget.dart';
 import 'buyer/Tomato_MarketPlace.dart';
 import 'farmer/Scan_Track_Tomato.dart';
 
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
   static String id = 'Home Page';
@@ -66,35 +67,32 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomContainerWidget(
-                          iconColor: kPraimaryColor,
-                          backgroundColor: const Color(0xffDCFCE7),
-                          color: kPraimryTextColor,
-                          title: 'I am a Farmer',
-                          subtitle:
-                              'Diagnose plant diseases, get care guides, and maintain healthy tomato crops',
-                          IconData: FontAwesomeIcons.leaf,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomContainerWidget(
+                        iconColor: kPraimaryColor,
+                        backgroundColor: const Color(0xffDCFCE7),
+                        color: kPraimryTextColor,
+                        title: 'I am a Farmer',
+                        subtitle:
+                            'Diagnose plant diseases, get care guides, and maintain healthy tomato crops',
+                        IconData: FontAwesomeIcons.leaf,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, ScanTrackTomato.id);
+                        },
+                        child: CustomButton(
+                          fontsize: 16,
+                          width: 340,
+                          height: 60,
+                          title: 'Enter as Farmer',
+                          color: kPraimaryColor,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, ScanTrackTomato.id);
-                          },
-                          child: CustomButton(
-                            fontsize: 16,
-                            width: 340,
-                            height: 60,
-                            title: 'Enter as Farmer',
-                            color: kPraimaryColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 26),
@@ -114,35 +112,32 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomContainerWidget(
-                          backgroundColor: const Color(0xffFEE2E2),
-                          color: kPraimryTextTwoColor,
-                          iconColor: kSecondaryColor,
-                          title: 'I am a Buyer',
-                          subtitle:
-                              'Check tomato quality, browse products, and purchase fresh tomatoes',
-                          IconData: FontAwesomeIcons.cartShopping,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomContainerWidget(
+                        backgroundColor: const Color(0xffFEE2E2),
+                        color: kPraimryTextTwoColor,
+                        iconColor: kSecondaryColor,
+                        title: 'I am a Buyer',
+                        subtitle:
+                            'Check tomato quality, browse products, and purchase fresh tomatoes',
+                        IconData: FontAwesomeIcons.cartShopping,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, TomatoMarketplace.id);
+                        },
+                        child: CustomButton(
+                          fontsize: 16,
+                          width: 340,
+                          height: 60,
+                          title: 'Enter as buyer',
+                          color: kSecondaryColor,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, TomatoMarketplace.id);
-                          },
-                          child: CustomButton(
-                            fontsize: 16,
-                            width: 340,
-                            height: 60,
-                            title: 'Enter as buyer',
-                            color: kSecondaryColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ],

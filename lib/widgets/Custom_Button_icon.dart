@@ -25,7 +25,6 @@ class CustomButtonIcon extends StatelessWidget {
   final Color fontcolor;
 
   @override
-
   // this Button used with icon in Scan - track page
   Widget build(BuildContext context) {
     return Container(

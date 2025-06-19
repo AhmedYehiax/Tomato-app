@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tomatooo_app/Screens/Edit_Profile.dart';
-import 'package:tomatooo_app/Screens/Settings.dart';
 import 'package:tomatooo_app/Screens/homepage.dart';
 import 'package:tomatooo_app/Screens/Profile_Page.dart';
 import 'package:tomatooo_app/Screens/Sign_in_RegisterPage.dart';
 import 'package:tomatooo_app/Screens/Scan_Results.dart';
 import 'package:tomatooo_app/Screens/Sign_up_Register_Page.dart';
 import 'package:tomatooo_app/Screens/splashscreen.dart';
-import 'package:tomatooo_app/generated/l10n.dart';
 import 'Screens/buyer/Tomato_MarketPlace.dart';
 import 'Screens/farmer/Scan_Track_Tomato.dart';
 import 'Screens/farmer/Tomato_Fruit_Tracking.dart';
@@ -27,13 +23,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
       routes: {
         Splashscreen.id: (context) => const Splashscreen(),
         Registerpage.id: (context) => const Registerpage(),
@@ -45,10 +34,8 @@ class MyApp extends StatelessWidget {
         TomatoFruitTracking.id: (context) => const TomatoFruitTracking(),
         AddNewPlant.id: (context) => const AddNewPlant(),
         ProfilePage.id: (context) => const ProfilePage(),
-        Settings.id: (context) => const Settings(),
         TomatoMarketplace.id: (context) => const TomatoMarketplace(),
         FarmDetails.id: (context) => const FarmDetails(),
-        EditProfileScreen.id:(context)=>EditProfileScreen(),
       },
       initialRoute: Splashscreen.id, // Changed to splash screen
       // initialRoute: ScanTrackTomato.id,

@@ -17,7 +17,7 @@ class CustomButton extends StatelessWidget {
   final double height;
   final double fontsize;
   final dynamic borderRadius;
-  final VoidCallback? onPressed;
+  final dynamic onPressed;
 
   @override
   Widget build(BuildContext context) {

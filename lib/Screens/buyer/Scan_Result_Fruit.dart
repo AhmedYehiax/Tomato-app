@@ -8,13 +8,11 @@ import 'package:tomatooo_app/Constants.dart';
 
 class ScanResultFruit extends StatelessWidget {
   final String className;
-  final String confidence;
   final Uint8List? imageBytes;
 
   const ScanResultFruit({
     Key? key,
     required this.className,
-    required this.confidence,
     this.imageBytes,
   }) : super(key: key);
 
@@ -52,7 +50,6 @@ class ScanResultFruit extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => ScanResultFruit(
               className: result['class_number']?.toString() ?? 'N/A',
-              confidence: (result['confidence'] ?? 0).toStringAsFixed(2),
               imageBytes: bytes,
             ),
           ),
@@ -78,7 +75,6 @@ class ScanResultFruit extends StatelessWidget {
           'daysPostHarvest': '0-3 days',
           'daysLeft': '13-16 days',
           'color': 'green',
-          'icon': Icons.check_circle,
         };
       case 'Class B':
         return {
@@ -88,7 +84,6 @@ class ScanResultFruit extends StatelessWidget {
           'daysPostHarvest': '4-6 days',
           'daysLeft': '10-12 days',
           'color': 'emerald',
-          'icon': Icons.check_circle,
         };
       case 'Class C':
         return {
@@ -98,7 +93,6 @@ class ScanResultFruit extends StatelessWidget {
           'daysPostHarvest': '8-9 days',
           'daysLeft': '7-9 days',
           'color': 'yellow',
-          'icon': Icons.info,
         };
       case 'Class D':
         return {
@@ -108,7 +102,6 @@ class ScanResultFruit extends StatelessWidget {
           'daysPostHarvest': '10-12 days',
           'daysLeft': '4-6 days',
           'color': 'orange',
-          'icon': Icons.warning,
         };
       case 'Class E':
         return {
@@ -118,7 +111,6 @@ class ScanResultFruit extends StatelessWidget {
           'daysPostHarvest': '14+ days',
           'daysLeft': '0 days',
           'color': 'red',
-          'icon': Icons.warning,
         };
       default:
         return {
@@ -128,7 +120,6 @@ class ScanResultFruit extends StatelessWidget {
           'daysPostHarvest': 'N/A',
           'daysLeft': 'N/A',
           'color': 'grey',
-          'icon': Icons.help_outline,
         };
     }
   }
@@ -153,8 +144,6 @@ class ScanResultFruit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final parsedConfidence = double.tryParse(confidence) ?? 0.0;
-    final percentage = (parsedConfidence).round();
     final currentQuality = getQualityData(className);
 
     return Scaffold(
@@ -493,12 +482,6 @@ class ScanResultFruit extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            ResultItem(
-                      label: "Confidence:",
-                      percentage: percentage,
-                      color: _getConfidenceColor(parsedConfidence),
-                    ),
-                    const SizedBox(height: 35),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 15.0),
                       child: Row(
@@ -606,13 +589,6 @@ class ResultItem extends StatelessWidget {
   }
 }
 
-Color _getConfidenceColor(double confidence) {
-  return confidence > 0.9
-      ? Colors.green
-      : confidence > 0.7
-      ? Colors.orange
-      : Colors.red;
-}
 
 Widget _buildInfoBox({
   required String label,

@@ -6,11 +6,13 @@ class PlanetInformationContainer extends StatefulWidget {
   const PlanetInformationContainer({
     super.key,
     required this.nameController,
-    required this.idController,
+    required this.onDateSelected,
+    required this.selectedDate,
   });
 
   final TextEditingController nameController;
-  final TextEditingController idController;
+  final Function(DateTime) onDateSelected;
+  final DateTime selectedDate;
 
   @override
   State<PlanetInformationContainer> createState() =>
@@ -18,7 +20,6 @@ class PlanetInformationContainer extends StatefulWidget {
 }
 class _PlanetInformationContainerState
     extends State<PlanetInformationContainer> {
-  DateTime _selectedDate = DateTime.now();
   String? _selectedVariety;
   final TextEditingController _notesController = TextEditingController();
 
@@ -47,14 +48,12 @@ class _PlanetInformationContainerState
   void _pickDate() async {
     DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: _selectedDate,
+      initialDate: widget.selectedDate,
       firstDate: DateTime(2020),
       lastDate: DateTime(2035),
     );
     if (picked != null) {
-      setState(() {
-        _selectedDate = picked;
-      });
+      widget.onDateSelected(picked);
     }
   }
 
@@ -118,21 +117,6 @@ class _PlanetInformationContainerState
             },
           ),
           const SizedBox(height: 20),
-          // Plant ID
-          const Text('Plant ID'),
-          const SizedBox(height: 8),
-          TextField(
-            controller: widget.idController,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              hintText: 'Enter plant ID',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-
           // Planting Date
           const Text('Planting Date'),
           const SizedBox(height: 8),
@@ -143,7 +127,7 @@ class _PlanetInformationContainerState
                 readOnly: true,
                 controller: TextEditingController(
                   text:
-                      '${_selectedDate.month}/${_selectedDate.day}/${_selectedDate.year}',
+                      '${widget.selectedDate.month}/${widget.selectedDate.day}/${widget.selectedDate.year}',
                 ),
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.calendar_today),

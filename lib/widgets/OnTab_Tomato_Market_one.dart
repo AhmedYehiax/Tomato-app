@@ -16,8 +16,7 @@ class _OntabTomatoMarketOneState extends State<OntabTomatoMarketOne> {
     Farms(
       name: 'Sunshine Farms',
       location: 'California',
-      discription:
-          'Family-owned farm practicing organic methods since 1985. Specializes in heirloom tomato varieties.',
+      discription: 'Family-owned farm practicing organic methods since 1985. Specializes in heirloom tomato varieties.',
       image: 'assets/Images/Farms/farm1.png',
       rating: 4.8,
       isFavorite: false,
@@ -25,8 +24,7 @@ class _OntabTomatoMarketOneState extends State<OntabTomatoMarketOne> {
     Farms(
       name: 'Green Valley Farms',
       location: 'Oregon',
-      discription:
-          'Sustainable farming practices with a focus on organic tomatoes and seasonal produce.',
+      discription: 'Sustainable farming practices with a focus on organic tomatoes and seasonal produce.',
       image: 'assets/Images/Farms/farm2.png',
       rating: 4.6,
       isFavorite: false,
@@ -34,8 +32,7 @@ class _OntabTomatoMarketOneState extends State<OntabTomatoMarketOne> {
     Farms(
       name: 'Red Barn Farms',
       location: 'Washington',
-      discription:
-          'Specializing in heirloom and hybrid tomato varieties, grown with care and expertise.',
+      discription: 'Specializing in heirloom and hybrid tomato varieties, grown with care and expertise.',
       image: 'assets/Images/Farms/farm3.jpg',
       rating: 4.9,
       isFavorite: false,
@@ -46,7 +43,7 @@ class _OntabTomatoMarketOneState extends State<OntabTomatoMarketOne> {
     setState(() {
       final farm = farms[index];
       farm.isFavorite = !farm.isFavorite;
-
+      
       if (farm.isFavorite) {
         FarmFavoriteManager.addFavorite(farm);
       } else {

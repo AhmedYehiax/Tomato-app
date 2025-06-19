@@ -54,21 +54,20 @@ class CustomGrowthTrend extends StatelessWidget {
         ),
         SizedBox(height: 25),
         SizedBox(
-          height: 700, // Adjust based on your needs
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: ListView.separated(
-              itemCount: plants.length,
-              separatorBuilder: (context, index) => const SizedBox(height: 10),
-              itemBuilder: (context, index) {
-                final plant = plants[index];
-                return ContainerGrowthHistoryLine(
-                  Name: plant.Name,
-                  growthStage: plant.growthStage,
-                  id: plant.id,
-                );
-              },
-            ),
+          height: 500, // Adjust based on your needs
+          child: ListView.separated(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            scrollDirection: Axis.vertical,
+            itemCount: plants.length,
+            separatorBuilder: (context, index) => const SizedBox(height: 10),
+            itemBuilder: (context, index) {
+              final plant = plants[index];
+              return ContainerGrowthHistoryLine(
+                Name: plant.Name,
+                growthStage: plant.growthStage,
+                id:plant.id,
+              );
+            },
           ),
         ),
       ],
