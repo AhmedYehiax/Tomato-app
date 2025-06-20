@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,12 +8,19 @@ import 'package:tomatooo_app/widgets/Custom_Button_icon.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import '../Screens/buyer/Scan_Result_Fruit.dart';
-
+import 'package:tomatooo_app/Models/Farms_Models.dart';
 class FarmDetailsWidgets extends StatelessWidget {
-  const FarmDetailsWidgets({super.key});
+  const FarmDetailsWidgets({super.key, this.farm});
+  final Farms? farm;
   final String img = 'assets/Images/Farms/farm1.png';
 
+  String _getEmail(String farmName) {
+    return 'contact@${farmName.toLowerCase().replaceAll(' ', '')}.com';
+  }
 
+  String _getWebsite(String farmName) {
+    return 'www.${farmName.toLowerCase().replaceAll(' ', '')}.com';
+  }
   Future<void> _takePhoto(BuildContext context) async {
     try {
       final ImagePicker picker = ImagePicker();
@@ -66,6 +72,14 @@ class FarmDetailsWidgets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final name = farm?.name ?? 'Sunshine Farms';
+    final location = farm?.location ?? 'California';
+    final rating = farm?.rating ?? 4.8;
+    final description =
+        farm?.discription ??
+            'Sunshine Farms has been a cornerstone of sustainable agriculture in California for over three decades. Our family has been growing premium heirloom tomatoes using traditional organic methods passed down through generations. We take pride in our commitment to biodiversity, soil health, and environmentally friendly farming practices. Our tomatoes are known for their exceptional flavor, vibrant colors, and nutritional value.';
+    final image = farm?.image ?? img;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: ListView(
@@ -77,7 +91,7 @@ class FarmDetailsWidgets extends StatelessWidget {
               borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10)),
               color: Colors.red,
               image: DecorationImage(
-                image: AssetImage(img),
+                image: AssetImage(image),
                 fit: BoxFit.cover,
               ),
             ),
@@ -88,7 +102,7 @@ class FarmDetailsWidgets extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Sunshine Farms',
+                name,
                 style: TextStyle(
                   fontFamily: kFontFamily,
                   fontSize: 25,
@@ -106,26 +120,7 @@ class FarmDetailsWidgets extends StatelessWidget {
                   ),
                   SizedBox(width: 3),
                   Text(
-                    'California',
-                    style: TextStyle(
-                      fontFamily: kFontFamily,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  SizedBox(width: 5),
-                  Text(
-                    '.',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.blueGrey,
-                    ),
-                  ),
-                  SizedBox(width: 5),
-                  Text(
-                    '15 miles',
+                    location,
                     style: TextStyle(
                       fontFamily: kFontFamily,
                       fontSize: 18,
@@ -144,7 +139,7 @@ class FarmDetailsWidgets extends StatelessWidget {
                   Icon(Icons.star, size: 30, color: Color(0xffFACC15)),
                   Icon(Icons.star, size: 30, color: Color(0xffFACC15)),
                   Text(
-                    '(4.8)',
+                    '($rating)',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                   ),
                 ],
@@ -183,7 +178,7 @@ class FarmDetailsWidgets extends StatelessWidget {
                       _buildContactItem(
                         Icons.email_outlined,
                         'Email',
-                          'contact@sunshinefarms.com',
+                        _getEmail(name),
                             () => {/* Launch email */},
                       ),
                       const Divider(
@@ -192,7 +187,7 @@ class FarmDetailsWidgets extends StatelessWidget {
                       _buildContactItem(
                         Icons.language,
                         'Website',
-                        'www.sunshinefarms.com',
+                        _getWebsite(name),
                             () => {/* Launch website */},
                       ),
                       const Divider(
@@ -201,7 +196,7 @@ class FarmDetailsWidgets extends StatelessWidget {
                       _buildContactItem(
                         Icons.location_on_outlined,
                         'Address',
-                        '1234 Tomato Lane, Fresno, CA 93706',
+                        '1234 Tomato Lane,  ${location}',
                             () => {/* Open maps */},
                       ),
                     ]
@@ -295,7 +290,6 @@ class FarmDetailsWidgets extends StatelessWidget {
           SizedBox(height: 25),
           Container(
             width: double.infinity,
-            height: 350,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
@@ -306,7 +300,7 @@ class FarmDetailsWidgets extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'About Sunshine Farms:',
+                    'About $name:',
                     style: TextStyle(
                       fontFamily: kFontFamily,
                       fontSize: 20,
@@ -315,7 +309,7 @@ class FarmDetailsWidgets extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Sunshine Farms has been a cornerstone of sustainable agriculture in California for over three decades. Our family has been growing premium heirloom tomatoes using traditional organic methods passed down through generations. We take pride in our commitment to biodiversity, soil health, and environmentally friendly farming practices. Our tomatoes are known for their exceptional flavor, vibrant colors, and nutritional value.',
+                    description,
                     style: TextStyle(
                       fontFamily: kFontFamily,
                       fontSize: 17,
@@ -451,7 +445,10 @@ class FarmDetailsWidgets extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const  EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 15,
+            ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -627,7 +624,10 @@ class FarmDetailsWidgets extends StatelessWidget {
   }
 }
 
-Widget _buildContactItem(IconData icon, String label, String value, VoidCallback onTap) {
+Widget _buildContactItem(IconData icon,
+    String label,
+    String value,
+    VoidCallback onTap) {
   return InkWell(
     onTap: onTap,
     child: Padding(

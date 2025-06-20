@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tomatooo_app/Constants.dart';
 import '../Screens/buyer/farmdetails.dart';
-
+import 'package:tomatooo_app/Models/Farms_Models.dart';
 
 class ContainerOntabTomatoMarketplace extends StatelessWidget {
   const ContainerOntabTomatoMarketplace({
@@ -26,9 +26,16 @@ class ContainerOntabTomatoMarketplace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  GestureDetector(
-        onTap: () {
-      Navigator.pushNamed(context, FarmDetails.id);
-    },
+        onTap: () {final farm = Farms(  
+          name: name,
+          location: location,
+          discription: discription,
+          image: image,
+          rating: rating,
+          isFavorite: isFavorite,
+        );
+        Navigator.pushNamed(context, FarmDetails.id, arguments: farm);
+      },
     child:Container(
       width: double.infinity,
       height: 150,

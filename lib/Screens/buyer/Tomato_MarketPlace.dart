@@ -66,7 +66,7 @@ class _TomatoMarketplaceState extends State<TomatoMarketplace>
         automaticallyImplyLeading: false,
         title: Center(
           child: Text(
-            'Tomato Marketplace',
+            'Tomato Farms',
             style: TextStyle(
               fontFamily: kFontFamily,
               fontSize: 24,
@@ -80,22 +80,21 @@ class _TomatoMarketplaceState extends State<TomatoMarketplace>
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
-            SearchBar(),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Icon(Icons.favorite_border_outlined, color: kSecondaryColor),
-                const SizedBox(width: 5),
-                Text(
-                  'Tomato Farms',
-                  style: TextStyle(
-                    fontFamily: kFontFamily,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
+            // SizedBox(height: 10),
+            // Row(
+            //   children: [
+            //     Icon(Icons.favorite_border_outlined, color: kSecondaryColor),
+            //     const SizedBox(width: 5),
+            //     Text(
+            //       'Tomato Farms',
+            //       style: TextStyle(
+            //         fontFamily: kFontFamily,
+            //         fontSize: 20,
+            //         fontWeight: FontWeight.w600,
+            //       ),
+            //     ),
+            //   ],
+            // ),
             SizedBox(height: 10),
             Card(
               shape: RoundedRectangleBorder(
@@ -184,41 +183,6 @@ class _TomatoMarketplaceState extends State<TomatoMarketplace>
 
             }
           },
-        ),
-      ),
-    );
-  }
-}
-
-class SearchBar extends StatelessWidget {
-  const SearchBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 18),
-      child: Container(
-        child: TextField(
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.all(15),
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(50),
-            ),
-            filled: true,
-            fillColor: Color(0xffFFFCFC),
-            hintText: 'Search farms by name...',
-            hintStyle: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: Colors.grey,
-            ),
-            prefixIcon: Icon(
-              Icons.search_sharp,
-              size: 25,
-              color: const Color.fromARGB(255, 236, 85, 74),
-            ),
-          ),
         ),
       ),
     );

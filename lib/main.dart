@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tomatooo_app/Screens/Edit_Profile.dart';
+import 'package:tomatooo_app/Screens/Settings.dart';
 import 'package:tomatooo_app/Screens/homepage.dart';
 import 'package:tomatooo_app/Screens/Profile_Page.dart';
 import 'package:tomatooo_app/Screens/Sign_in_RegisterPage.dart';
@@ -34,8 +36,10 @@ class MyApp extends StatelessWidget {
         TomatoFruitTracking.id: (context) => const TomatoFruitTracking(),
         AddNewPlant.id: (context) => const AddNewPlant(),
         ProfilePage.id: (context) => const ProfilePage(),
+        Settings.id: (context) => const Settings(),
         TomatoMarketplace.id: (context) => const TomatoMarketplace(),
         FarmDetails.id: (context) => const FarmDetails(),
+        EditProfileScreen.id:(context)=>EditProfileScreen(),
       },
       initialRoute: Splashscreen.id, // Changed to splash screen
       // initialRoute: ScanTrackTomato.id,

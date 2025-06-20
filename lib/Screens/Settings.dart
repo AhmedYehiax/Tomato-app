@@ -13,13 +13,14 @@ class Settings extends StatefulWidget {
 
   @override
   State<Settings> createState() => _SettingsState();
+
 }
 
 class _SettingsState extends State<Settings> {
   File? _profileImage;
   final _items = [
     SalomonBottomBarItem(
-      icon: Icon(Icons.house_outlined),
+      icon: Icon(Icons.home_outlined),
       title: Text('Home'),
       selectedColor: Colors.white,
       unselectedColor: Colors.white,
