@@ -7,17 +7,22 @@ This repository contains four deep‐learning models:
 3. 🌱 **Growth Stage Classification** – YOLOv8 to determine tomato plant growth stage.  
 4. 🍅 **Freshness Evaluation** – MobileNetV3 classifier to assess tomato ripeness and quality.
 
+
 ## 📁 Project Structure
 
 - `leaf_disease_model/`: YoloV8 to detect leaf diseases.
 - `modifed_leaf_disease_model/`: YoloV8 to detect leaf diseases with updates in the dataset + MobileNetV3 classifier.
 - `growth_stage_model/`: YoloV8 to determine the stage of tomato plant growth.
+- `freshness_model/`: MobileNetV3 classifier for tomato freshness.
+
 
 ## 🤝 AI Model Credits
 
 Special thanks to **[AhmedNasser1207](https://github.com/AhmedNasser1207)** for the comprehensive AI model suite that powers the intelligent features of TomatoConnect.
 
-**AI Models Repository**: [tomato-ai-project](https://github.com/AhmedNasser1207/tomato-ai-project.git) `freshness_model/`: MobileNetV3 classifier for tomato freshness.
+**AI Models Repository**: [tomato-ai-project](https://github.com/AhmedNasser1207/tomato-ai-project.git) 
+
+
 
 # TomatoConnect 🍅
 
@@ -356,15 +361,6 @@ The API documentation is available at `http://localhost:8000/docs` when running 
 - Camera permission handling on some Android devices
 - iOS simulator camera limitations
 - Large image processing may cause timeouts
-
-
-## 📞 Support
-
-For support and questions:
-
-- **Email**: [support@tomatoconnect.com](mailto:support@tomatoconnect.com)
-- **Issues**: [GitHub Issues](https://github.com/ahmedyehiax/tomato-connect/issues)
-- **Documentation**: [Wiki](https://github.com/ahmedyehiax/tomato-connect/wiki)
 
 
 ## 📜 License
