@@ -1,4 +1,4 @@
-# Tomato AI Project 🌿🍅
+# Tomato AI Project 🌿🍅(https://github.com/AhmedNasser1207/tomato-ai-project.git)
 A suite of four deep‑learning models to help farmers and buyers rapidly detect leaf diseases, track growth stages, and assess tomato freshness.
 This repository contains four deep‐learning models:
 
@@ -6,6 +6,12 @@ This repository contains four deep‐learning models:
 2. 🆕 **Modified Leaf Disease Detection** – Custom‑tuned YOLOv8 for improved accuracy in low‑light scenarios.  
 3. 🌱 **Growth Stage Classification** – YOLOv8 to determine tomato plant growth stage.  
 4. 🍅 **Freshness Evaluation** – MobileNetV3 classifier to assess tomato ripeness and quality.
+
+## 🤝 AI Model Credits
+
+Special thanks to **[AhmedNasser1207](https://github.com/AhmedNasser1207)** for the comprehensive AI model suite that powers the intelligent features of TomatoConnect.
+
+**AI Models Repository**: [tomato-ai-project](https://github.com/AhmedNasser1207/tomato-ai-project.git)
 
 ## 📁 Project Structure
 
