@@ -51,57 +51,6 @@ TomatoConnect is a Flutter-based mobile application that bridges the gap between
 - **Background jobs**: Node-cron
 
 
-## 📁 Project Structure
-
-```plaintext
-tomato_connect/
-├── lib/
-│   ├── main.dart
-│   ├── screens/
-│   │   ├── farmer/
-│   │   │   ├── farmer_home_screen.dart
-│   │   │   ├── scan_leaf_screen.dart
-│   │   │   ├── scan_result_screen.dart
-│   │   │   ├── fruit_tracking_screen.dart
-│   │   │   ├── add_plant_screen.dart
-│   │   │   └── farmer_profile_screen.dart
-│   │   ├── buyer/
-│   │   │   ├── buyer_home_screen.dart
-│   │   │   ├── farm_list_screen.dart
-│   │   │   ├── farm_detail_screen.dart
-│   │   │   ├── camera_screen.dart
-│   │   │   ├── quality_result_screen.dart
-│   │   │   └── buyer_profile_screen.dart
-│   │   └── welcome_screen.dart
-│   ├── widgets/
-│   │   ├── role_card.dart
-│   │   ├── feature_card.dart
-│   │   ├── custom_bottom_nav.dart
-│   │   ├── farm_card.dart
-│   │   ├── plant_card.dart
-│   │   ├── category_badge.dart
-│   │   ├── star_rating.dart
-│   │   └── loading_indicator.dart
-│   ├── models/
-│   │   └── disease_detection.dart
-│   ├── services/
-│   │   └── api_service.dart
-│   ├── providers/
-│   │   ├── auth_provider.dart
-│   │   ├── farm_provider.dart
-│   │   └── plant_provider.dart
-│   └── theme/
-│       └── app_theme.dart
-├── backend/
-│   ├── main.py
-│   ├── requirements.txt
-│   └── Dockerfile
-├── assets/
-│   ├── images/
-│   └── fonts/
-└── README.md
-```
-
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -210,7 +159,7 @@ flutter run -d chrome
 - Treatment recommendations
 
 
-### Farm Marketplace
+### Farms List 
 
 - Location-based farm discovery
 - Advanced filtering and search
@@ -243,9 +192,7 @@ flutter run -d chrome
 ### Backend
 
 - **FastAPI**: Modern Python web framework
-- **Pillow**: Image processing
-- **NumPy**: Numerical computations
-- **Pydantic**: Data validation
+- **Node.js**: Image processing
 
 
 ### Development Tools
