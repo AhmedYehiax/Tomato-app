@@ -1,4 +1,4 @@
-# Tomato AI Project 🌿🍅(https://github.com/AhmedNasser1207/tomato-ai-project.git)
+# Tomato AI Project 🌿🍅
 A suite of four deep‑learning models to help farmers and buyers rapidly detect leaf diseases, track growth stages, and assess tomato freshness.
 This repository contains four deep‐learning models:
 
@@ -374,7 +374,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- **Your Name** - *Initial work* - [YourGitHub](https://github.com/ahmedyehiax)
+- **Ahmed Yehia** - *Initial work* - [AhmedYehiax](https://github.com/ahmedyehiax)
 
 
 ## 🙏 Acknowledgments
