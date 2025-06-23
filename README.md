@@ -13,7 +13,7 @@ This repository contains four deep‐learning models:
 - `modifed_leaf_disease_model/`: YoloV8 to detect leaf diseases with updates in the dataset + MobileNetV3 classifier.
 - `growth_stage_model/`: YoloV8 to determine the stage of tomato plant growth.
 
--## 🤝 AI Model Credits
+## 🤝 AI Model Credits
 
 Special thanks to **[AhmedNasser1207](https://github.com/AhmedNasser1207)** for the comprehensive AI model suite that powers the intelligent features of TomatoConnect.
 
