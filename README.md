@@ -4,7 +4,7 @@ A comprehensive mobile application connecting tomato farmers and buyers through 
 
 ## 📱 Overview
 
-TomatoConnect is a Flutter-based mobile application that bridges the gap between tomato farmers and buyers. The app features AI-powered plant disease detection, tomato quality assessment, farm discovery, and direct marketplace access.
+TomatoConnect is a Flutter-based mobile application that bridges the gap between tomato farmers and buyers. The app features AI-powered plant disease detection, tomato quality assessment, farm discovery.
 
 ### 🎯 Key Features
 
@@ -14,7 +14,6 @@ TomatoConnect is a Flutter-based mobile application that bridges the gap between
 - 📊 Plant growth tracking and monitoring
 - 📸 Camera integration for leaf scanning
 - 📈 Detailed care instructions and recommendations
-- 👤 Farmer profile management
 
 
 **For Buyers:**
@@ -24,7 +23,6 @@ TomatoConnect is a Flutter-based mobile application that bridges the gap between
 - 📍 Location-based farm search
 - ❤️ Favorites and wishlist functionality
 - 🔍 Tomato quality scanning
-- 👤 Buyer profile and order history
 
 
 ## 🏗️ Architecture
@@ -42,7 +40,7 @@ TomatoConnect is a Flutter-based mobile application that bridges the gap between
 - **Framework**: FastAPI
 - **Language**: Python 3.9+
 - **AI/ML**: TensorFlow/PyTorch for disease detection
-- **Database**: SQLite (development), PostgreSQL (production)
+- **Database**: JavaScript (development), Node.js(production)
 
 
 ### Additional Services (Node.js)
@@ -227,7 +225,6 @@ flutter run -d chrome
 - Freshness scoring
 - Ripeness detection
 - Storage recommendations
-- Purchase guidance
 
 
 ## 🛠️ Technologies Used
@@ -246,7 +243,6 @@ flutter run -d chrome
 ### Backend
 
 - **FastAPI**: Modern Python web framework
-- **Uvicorn**: ASGI server
 - **Pillow**: Image processing
 - **NumPy**: Numerical computations
 - **Pydantic**: Data validation
@@ -356,7 +352,6 @@ docker run -p 8000:8000 tomato-connect-api
 
 - **Android**: Google Play Store
 - **iOS**: Apple App Store
-- **Enterprise**: Firebase App Distribution
 
 
 ## 🤝 Contributing
@@ -395,24 +390,13 @@ The API documentation is available at `http://localhost:8000/docs` when running 
 - Large image processing may cause timeouts
 
 
-## 🔮 Future Enhancements
-
-- Real-time chat between farmers and buyers
-- Weather integration for farming recommendations
-- Marketplace with payment integration
-- Push notifications
-- Offline mode support
-- Multi-language support
-- Advanced analytics dashboard
-
-
 ## 📞 Support
 
 For support and questions:
 
 - **Email**: [support@tomatoconnect.com](mailto:support@tomatoconnect.com)
-- **Issues**: [GitHub Issues](https://github.com/yourusername/tomato-connect/issues)
-- **Documentation**: [Wiki](https://github.com/yourusername/tomato-connect/wiki)
+- **Issues**: [GitHub Issues](https://github.com/ahmedyehiax/tomato-connect/issues)
+- **Documentation**: [Wiki](https://github.com/ahmedyehiax/tomato-connect/wiki)
 
 
 ## 📜 License
@@ -421,7 +405,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- **Your Name** - *Initial work* - [YourGitHub](https://github.com/yourusername)
+- **Your Name** - *Initial work* - [YourGitHub](https://github.com/ahmedyehiax)
 
 
 ## 🙏 Acknowledgments
@@ -430,20 +414,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - FastAPI for the modern Python web framework
 - TensorFlow team for AI/ML capabilities
 - Open source community for various packages used
-
-
-## 📊 Project Status
-
-
-
-
-
-
-
-
-
-
-
 
 
 
