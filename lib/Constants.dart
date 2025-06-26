@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 class AppUri{
-  static String uriFarmer = 'c7ab-34-147-84-213.ngrok-free.app';
+  static String uriFarmer = 'aa5a-34-142-159-222.ngrok-free.app';
   static String uriFruit = '192.168.1.5';
 }
 const kPraimaryColor = Color(0xff16A34A);
