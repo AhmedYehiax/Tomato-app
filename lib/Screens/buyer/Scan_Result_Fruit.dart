@@ -319,7 +319,7 @@ class ScanResultFruit extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           )
-                              : const Center(child: Text('No image available')),
+                              : Center(child: Image.asset('assets/Images/Draft.png',fit: BoxFit.fill,)),
                         ),
                         SizedBox(height: 24,),
                         Row(

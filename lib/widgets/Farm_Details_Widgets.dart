@@ -468,7 +468,7 @@ class FarmDetailsWidgets extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         child: Image.asset(
                           'assets/Images/Farms/gallery1.jpg',
-                          width: 110,
+                          width: 100,
                           height: 130,
                           fit: BoxFit.cover,
                         ),
@@ -477,7 +477,7 @@ class FarmDetailsWidgets extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         child: Image.asset(
                           'assets/Images/Farms/gallery2.jpg',
-                          width: 110,
+                          width: 100,
                           height: 130,
                           fit: BoxFit.cover,
                         ),
@@ -486,7 +486,7 @@ class FarmDetailsWidgets extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         child: Image.asset(
                           'assets/Images/Farms/gallery3.jpg',
-                          width: 110,
+                          width: 100,
                           height: 130,
                           fit: BoxFit.cover,
                         ),
@@ -572,42 +572,62 @@ class FarmDetailsWidgets extends StatelessWidget {
                             fontcolor: Colors.white,
                           ),
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => HistoryScanTomato()),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 30), // Reduced horizontal padding since we're adding an icon
-                            backgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              side: BorderSide(
-                                color: Color(0xffFEE2E2), // Border color
-                                width: 1.0, // Border width
-                              ),
-                            ),
-                          ),
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min, // This makes the row take only necessary space
-                            children: [
-                              Icon(Icons.history, color: Colors.black,size: 17,), // Added icon
-                              SizedBox(width: 14), // Space between icon and text
-                              Text(
-                                'History',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                    fontWeight: FontWeight.w500
-                                ),
-                              ),
-                            ],
+                        GestureDetector(
+                          onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => HistoryScanTomato()),
+                                );
+                              },
+                          child: CustomButtonIcon(
+                            title: 'History',
+                            color: Colors.white,
+                            IconData: Icons.history_outlined,
+                            iconColor: Colors.black,
+                            width: 160,
+                            height: 55,
+                            fontsize: 17,
+                            iconsize: 17,
+                            border: Border.all(width: 1,color: Colors.red),
+                            fontcolor: Colors.black,
                           ),
                         ),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(builder: (context) => HistoryScanTomato()),
+                        //     );
+                        //   },
+                        //   style: ElevatedButton.styleFrom(
+                        //     elevation: 0,
+                        //     padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 30), // Reduced horizontal padding since we're adding an icon
+                        //     backgroundColor: Colors.white,
+                        //     shape: RoundedRectangleBorder(
+                        //       borderRadius: BorderRadius.circular(8),
+                        //       side: BorderSide(
+                        //         color: Color(0xffFEE2E2), // Border color
+                        //         width: 1.0, // Border width
+                        //       ),
+                        //     ),
+                        //   ),
+                        //   child: const Row(
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     mainAxisSize: MainAxisSize.min, // This makes the row take only necessary space
+                        //     children: [
+                        //       Icon(Icons.history, color: Colors.black,size: 17,), // Added icon
+                        //       SizedBox(width: 14), // Space between icon and text
+                        //       Text(
+                        //         'History',
+                        //         style: TextStyle(
+                        //           color: Colors.black,
+                        //           fontSize: 20,
+                        //             fontWeight: FontWeight.w500
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

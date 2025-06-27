@@ -38,28 +38,57 @@ class _TabOneTomatoFruitTrackingState extends State<TabOneTomatoFruitTracking> {
         headers: {'Content-Type': 'application/json'},
       );
 
-      print('API Response Status: ${response.statusCode}');
-      print('API Response Body: ${response.body}');
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = jsonDecode(response.body);
-        print('Parsed Response Data: $responseData');
+        
+        // Debug: Print the response to see the structure
+        print('API Response: ${response.body}');
         
         final List<dynamic> plantsData = responseData['plants'] ?? [];
-        print('Plants Data: $plantsData');
-        print('Plants Data Length: ${plantsData.length}');
         
         setState(() {
           plants = plantsData.map((plantData) {
-            print('Processing Plant: $plantData');
+            // Map status to growthStage and days
+            int growthStage = 20;
+            int days = 160;
+            String status = plantData['status'] ?? 'Plant Set';
+            
+            // Map status to appropriate values
+            switch (status) {
+              case 'Plant Set':
+                growthStage = 20;
+                days = 160;
+                break;
+              case 'Flowering':
+                growthStage = 40;
+                days = 65;
+                break;
+              case 'Fruit Set':
+                growthStage = 60;
+                days = 30;
+                break;
+              case 'Ripening':
+                growthStage = 80;
+                days = 15;
+                break;
+              case 'Harvesting':
+                growthStage = 100;
+                days = 0;
+                break;
+              default:
+                growthStage = 20;
+                days = 160;
+            }
+            
             return Plants(
               Name: plantData['tomatoType'] ?? 'Unknown Type',
               id: plantData['_id'] ?? 'No ID',
               lastUpdate: plantData['plantingDate'] ?? 'No Date',
               image: plantData['photo'] ?? '',
-              days: plantData['days'] ?? 160,
-              growthStage: plantData['growthStage'] ?? 20,
-              growthStageName: plantData['status'] ?? 'Plant Set',
+              days: days,
+              growthStage: growthStage,
+              growthStageName: status,
             );
           }).toList();
           
@@ -77,8 +106,6 @@ class _TabOneTomatoFruitTrackingState extends State<TabOneTomatoFruitTracking> {
           
           _isLoading = false;
         });
-        
-        print('Final Plants List Length: ${plants.length}');
       } else {
         setState(() {
           _errorMessage = 'Failed to load plants: ${response.statusCode}';
@@ -94,11 +121,90 @@ class _TabOneTomatoFruitTrackingState extends State<TabOneTomatoFruitTracking> {
     }
   }
 
-  void _updatePlantGrowthStage(int index, int stage, String stageName, int daysToHarvest) {
-    setState(() {
-      plants[index].updateGrowthStage(stage, stageName);
-      plants[index].days = daysToHarvest;
-    });
+  Future<void> _updatePlantGrowthStage(int index, int stage, String stageName, int daysToHarvest) async {
+    final plant = plants[index];
+    
+    try {
+      final response = await http.put(
+        Uri.parse('https://tomato-sigma-five.vercel.app/api/v1/growth/updatePlantStatus/${plant.id}'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'growthStage': stage,
+          'status': stageName,
+          'days': daysToHarvest,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        // Update local state immediately
+        setState(() {
+          plants[index].growthStage = stage;
+          plants[index].growthStageName = stageName;
+          plants[index].days = daysToHarvest;
+          plants[index].lastUpdate = DateTime.now().toString().split(' ')[0];
+        });
+        
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Plant status updated successfully'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to update plant status: ${response.statusCode}'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } catch (e) {
+      print('Error updating plant status: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error updating plant status: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  Future<void> _deletePlant(int index) async {
+    final plant = plants[index];
+    
+    try {
+      final response = await http.delete(
+        Uri.parse('https://tomato-sigma-five.vercel.app/api/v1/growth/deletePlant/${plant.id}'),
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      if (response.statusCode == 200) {
+        setState(() {
+          plants.removeAt(index);
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Plant deleted successfully'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to delete plant: ${response.statusCode}'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } catch (e) {
+      print('Error deleting plant: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error deleting plant: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   @override
@@ -190,16 +296,27 @@ class _TabOneTomatoFruitTrackingState extends State<TabOneTomatoFruitTracking> {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: plants.length,
               itemBuilder: (context, index) {
-                return CustomContainerTomatoFruitTracking(
-                  Name: plants[index].Name,
-                  id: plants[index].id,
-                  lastUpdate: plants[index].lastUpdate,
-                  image: plants[index].image,
-                  days: plants[index].days,
-                  growthStage: plants[index].growthStage,
-                  growthStageName: plants[index].growthStageName,
-                  onGrowthStageUpdate: (stage, stageName, daysToHarvest) =>
-                      _updatePlantGrowthStage(index, stage, stageName, daysToHarvest),
+                return Dismissible(
+                  key: Key(plants[index].id),
+                  direction: DismissDirection.startToEnd,
+                  background: Container(
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.only(right: 20),
+                    color: Colors.red,
+                    child: const Icon(Icons.delete, color: Colors.white),
+                  ),
+                  onDismissed: (direction) => _deletePlant(index),
+                  child: CustomContainerTomatoFruitTracking(
+                    Name: plants[index].Name,
+                    id: plants[index].id,
+                    lastUpdate: plants[index].lastUpdate,
+                    image: plants[index].image,
+                    days: plants[index].days,
+                    growthStage: plants[index].growthStage,
+                    growthStageName: plants[index].growthStageName,
+                    onGrowthStageUpdate: (stage, stageName, daysToHarvest) =>
+                        _updatePlantGrowthStage(index, stage, stageName, daysToHarvest),
+                  ),
                 );
               },
             ),

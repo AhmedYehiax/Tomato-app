@@ -254,13 +254,13 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(height: 10),
               const Text(
                 textAlign: TextAlign.center,
-                'Sarah Johnson',
+                'Ahmed Yehia',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 4),
               const Text(
                 textAlign: TextAlign.center,
-                'sarah.johnson@example.com',
+                'Ahmed.16@gmail.com',
                 style: TextStyle(color: Colors.grey),
               ),
               const SizedBox(height: 20),

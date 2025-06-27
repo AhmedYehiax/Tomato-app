@@ -105,7 +105,6 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
           _updateGrowthStageFromDetection(className);
 
         } else {
-          // No detections - don't update the image
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
@@ -136,7 +135,6 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
   }
 
   void _updateGrowthStageFromDetection(String className) {
-    // Map detected classes to growth stages
     int newPercentage;
     String newStageName;
 
@@ -165,7 +163,7 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
         newStageName = 'Harvesting';
         break;
       default:
-        return; // Don't update if class not recognized
+        return;
     }
 
     setState(() {
@@ -273,7 +271,6 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
           currentStageName = stageName;
           daysToHarvest = newDaysToHarvest;
         });
-        // Call the callback to update the parent widget
         if (widget.onGrowthStageUpdate != null) {
           widget.onGrowthStageUpdate!(percentage, stageName, newDaysToHarvest);
         }
@@ -336,7 +333,6 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () {
-      // Navigate to the details page when tapped
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -358,36 +354,6 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
                 date: '2023-03-15',
                 growthStage: 'Fruit Set',
               ),
-              GrowthHistory(
-                image: AssetImage('assets/Images/tom2.png'),
-                date: '2023-04-20',
-                growthStage: 'Plant Set',
-              ),
-              GrowthHistory(
-                image: AssetImage('assets/Images/tom3.png'),
-                date: '2023-03-15',
-                growthStage: 'Fruit Set',
-              ),
-              GrowthHistory(
-                image: AssetImage('assets/Images/tom2.png'),
-                date: '2023-04-20',
-                growthStage: 'Plant Set',
-              ),
-              GrowthHistory(
-                image: AssetImage('assets/Images/tom3.png'),
-                date: '2023-03-15',
-                growthStage: 'Fruit Set',
-              ),
-              GrowthHistory(
-                image: AssetImage('assets/Images/tom2.png'),
-                date: '2023-04-20',
-                growthStage: 'Plant Set',
-              ),
-              GrowthHistory(
-                image: AssetImage('assets/Images/tom3.png'),
-                date: '2023-03-15',
-                growthStage: 'Fruit Set',
-              ),
             ],
           ),
         ),
@@ -397,7 +363,7 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
       padding: const EdgeInsets.symmetric(vertical: 18),
       child: Container(
         width: double.infinity,
-        height: 250, // Slightly increased for better spacing
+        height: 250,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10.0),
@@ -644,9 +610,7 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
   }
 
   Widget _buildImageWidget(String imageUrl) {
-    // Check if it's a network URL or local asset
     if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-      // Network image
       return Container(
         width: 80,
         height: 150,
@@ -693,7 +657,6 @@ class _CustomContainerTomatoFruitTrackingState extends State<CustomContainerToma
         ),
       );
     } else {
-      // Local asset
       return Container(
         width: 80,
         height: 150,

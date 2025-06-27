@@ -43,6 +43,7 @@ class _FarmDetailsState extends State<FarmDetails> {
         surfaceTintColor: const Color(0xffFEE2E2),
         backgroundColor: const Color(0xffFEE2E2),
         foregroundColor: kPraimryTextTwoColor,
+        leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back_outlined)),
         title: Center(
           child: Text(
             farm?.name ?? 'Farm Details',

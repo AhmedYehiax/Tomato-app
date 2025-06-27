@@ -24,9 +24,10 @@ class _PlantInfoContainerPhotoState extends State<PlantInfoContainerPhoto> {
     final ImagePicker picker = ImagePicker();
     final XFile? photo = await picker.pickImage(
       source: ImageSource.camera,
-      imageQuality: 80, // Reduce image quality to avoid large files
+      imageQuality: 100, // High quality for PNG
       maxWidth: 1024, // Limit image width
       maxHeight: 1024, // Limit image height
+      preferredCameraDevice: CameraDevice.rear,
     );
 
     if (photo != null) {
@@ -45,7 +46,7 @@ class _PlantInfoContainerPhotoState extends State<PlantInfoContainerPhoto> {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(
       source: ImageSource.gallery,
-      imageQuality: 80, // Reduce image quality to avoid large files
+      imageQuality: 100, // High quality for PNG
       maxWidth: 1024, // Limit image width
       maxHeight: 1024, // Limit image height
     );

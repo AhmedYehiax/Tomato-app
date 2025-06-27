@@ -1,9 +1,10 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tomatooo_app/Screens/buyer/Scan_Result_Fruit.dart';
-
 import '../../Constants.dart';
+import 'package:flutter/services.dart';
 
 class HistoryScanTomato extends StatefulWidget {
   const HistoryScanTomato({super.key});
@@ -15,27 +16,33 @@ class HistoryScanTomato extends StatefulWidget {
 class _HistoryScanTomatoState extends State<HistoryScanTomato> {
   List<ScanItem> scanHistory = [
     ScanItem(
-      date: '5/8/2024',
-      time: '14:32',
-      className: 'Class B',
-    ),
-    ScanItem(
-      date: '5/5/2024',
+      img: XFile('assets/Images/history.png'),
+      date: '25/6/2025',
       time: '10:15',
       className: 'Class A',
     ),
     ScanItem(
-      date: '5/1/2024',
+      img: XFile('assets/Images/historyB.png'),
+      date: '5/4/2025',
+      time: '14:32',
+      className: 'Class B',
+    ),
+    
+    ScanItem(
+      img: XFile('assets/Images/historyC.png'),
+      date: '5/3/2025',
       time: '09:45',
       className: 'Class C',
     ),
     ScanItem(
-      date: '4/28/2024',
+      img: XFile('assets/Images/historyD.png'),
+      date: '4/2/2025',
       time: '16:20',
       className: 'Class D',
     ),
     ScanItem(
-      date: '4/25/2024',
+      img: XFile('assets/Images/historyE.png'),
+      date: '24/1/2024',
       time: '11:30',
       className: 'Class E',
     ),
@@ -169,102 +176,118 @@ class _HistoryScanTomatoState extends State<HistoryScanTomato> {
   Widget _buildScanItem(ScanItem item, Map<String, dynamic> qualityData) {
     final color = getColorForQuality(qualityData['color']);
     return GestureDetector(
-        onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ScanResultFruit(className: item.className,),
-        ),
-      );
-    },
-    child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      color: Colors.white,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 100,
-            height: 110,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(12),
-              image: DecorationImage(
-                image: item.img != null
-                    ? FileImage(File(item.img!.path))
-                    : AssetImage('assets/Images/download.jpg') as ImageProvider,
-                fit: BoxFit.fill,
+      onTap: () async {
+        Uint8List? imageBytes;
+        if (item.img != null) {
+          if (item.img!.path.startsWith('assets/')) {
+            // Asset image
+            final byteData = await rootBundle.load(item.img!.path);
+            imageBytes = byteData.buffer.asUint8List();
+          } else {
+            // File image
+            imageBytes = await item.img!.readAsBytes();
+          }
+        }
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ScanResultFruit(
+              className: item.className,
+              imageBytes: imageBytes,
+            ),
+          ),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        color: Colors.white,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 100,
+              height: 110,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(12),
+                image: DecorationImage(
+                  image: item.img != null
+                      ? (item.img!.path.startsWith('assets/')
+                          ? AssetImage(item.img!.path) as ImageProvider
+                          : FileImage(File(item.img!.path)))
+                      : const AssetImage('assets/Images/download.jpg'),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    _buildInfoWithIcon(
-                      icon: Icons.calendar_today,
-                      text: item.date,
-                    ),
-                    const SizedBox(width: 16),
-                    _buildInfoWithIcon(
-                      icon: Icons.access_time,
-                      text: item.time,
-                    ),
-                    const Spacer(),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 4,
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      _buildInfoWithIcon(
+                        icon: Icons.calendar_today,
+                        text: item.date,
                       ),
-                      decoration: BoxDecoration(
-                        color: color,
-                        borderRadius: BorderRadius.circular(16),
+                      const SizedBox(width: 16),
+                      _buildInfoWithIcon(
+                        icon: Icons.access_time,
+                        text: item.time,
                       ),
-                      child: Text(
-                        item.className,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
+                      const Spacer(),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: color,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Text(
+                          item.className,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    qualityData['name'],
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: color,
                     ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  qualityData['name'],
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: color,
                   ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Harvested: ${qualityData['daysPostHarvest']}',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey.shade600,
+                  const SizedBox(height: 4),
+                  Text(
+                    'Harvested: ${qualityData['daysPostHarvest']}',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey.shade600,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  'Shelf life left: ${qualityData['daysLeft']}',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey.shade600,
+                  const SizedBox(height: 2),
+                  Text(
+                    'Shelf life left: ${qualityData['daysLeft']}',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey.shade600,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
     );
   }
 

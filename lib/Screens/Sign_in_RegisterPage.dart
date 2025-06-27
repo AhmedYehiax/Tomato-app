@@ -258,69 +258,7 @@ class _RegisterpageState extends State<Registerpage> {
                               height: 50,
                               fontsize: 18,
                               borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Row(
-                            children: const <Widget>[
-                              Expanded(child: Divider()),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                child: Text(
-                                  "Or continue with",
-                                  style: TextStyle(
-                                    fontFamily: kFontFamily,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.blueGrey,
-                                  ),
-                                ),
-                              ),
-                              Expanded(child: Divider()),
-                            ],
-                          ),
-                          const SizedBox(height: 15),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                CustomButtonIcon(
-                                  title: 'Google',
-                                  color: Colors.white,
-                                  IconData: FontAwesomeIcons.google,
-                                  iconColor: Colors.red,
-                                  width: 155,
-                                  height: 50,
-                                  fontsize: 16,
-                                  iconsize: 16,
-                                  border: Border.all(
-                                    width: 0.3,
-                                    color: Colors.grey,
-                                  ),
-                                  fontcolor: Colors.black,
-                                ),
-                                CustomButtonIcon(
-                                  title: 'Facebook',
-                                  color: Colors.white,
-                                  IconData: FontAwesomeIcons.facebook,
-                                  iconColor: const Color.fromARGB(
-                                    255,
-                                    3,
-                                    96,
-                                    172,
-                                  ),
-                                  width: 155,
-                                  height: 50,
-                                  fontsize: 16,
-                                  iconsize: 16,
-                                  border: Border.all(
-                                    width: 0.3,
-                                    color: Colors.grey,
-                                  ),
-                                  fontcolor: Colors.black,
-                                ),
-                              ],
+                              // onPressed: _isLoading ? null : _signIn,
                             ),
                           ),
                           const SizedBox(height: 20),

@@ -5,6 +5,7 @@ import 'package:tomatooo_app/widgets/Custom_Button.dart';
 import 'package:tomatooo_app/widgets/Planet_Information_Container.dart';
 import 'package:tomatooo_app/widgets/Plant_Info_Container_Photo.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 import 'dart:convert';
 import 'dart:io';
 
@@ -38,6 +39,13 @@ class _AddNewPlantState extends State<AddNewPlant> {
       return;
     }
 
+    // if (_imagePath.isEmpty) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(content: Text('Please add a plant photo')),
+    //   );
+    //   return;
+    // }
+
     setState(() {
       _isLoading = true;
     });
@@ -65,10 +73,11 @@ class _AddNewPlantState extends State<AddNewPlant> {
           var photoFile = await http.MultipartFile.fromPath(
             'photo',
             _imagePath,
+            contentType: MediaType('image', 'png'), // Specify PNG content type
           );
           request.files.add(photoFile);
           photoAdded = true;
-          print('Photo file added successfully');
+          print('Photo file added successfully as PNG');
         } catch (e) {
           print('Error adding photo file: $e');
           // Continue without photo if there's an error
@@ -87,7 +96,7 @@ class _AddNewPlantState extends State<AddNewPlant> {
         // Successfully added plant
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Plant added successfully!${photoAdded ? ' (with photo)' : ' (without photo)'}')),
+            SnackBar(content: Text('Plant added successfully')),
           );
           
           // Parse the response to get the actual plant data
@@ -165,6 +174,7 @@ class _AddNewPlantState extends State<AddNewPlant> {
         backgroundColor: const Color(0xffDCFCE7),
         surfaceTintColor: const Color(0xffDCFCE7),
         foregroundColor: kPraimryTextColor,
+        leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.keyboard_backspace_outlined)),
         title: const Text(
           'Add New Plant',
           style: TextStyle(
