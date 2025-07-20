@@ -29,6 +29,7 @@ Special thanks to **[AhmedNasser1207](https://github.com/AhmedNasser1207)** for 
 A comprehensive mobile application connecting tomato farmers and buyers through AI-powered disease detection and quality assessment.
 
 ## 📱 Overview
+![Watch the Demo Video](https://drive.google.com/file/d/10kxfnAHLniPe5DJEHfYV0uyj-H1FnKge/view)
 
 TomatoConnect is a Flutter-based mobile application that bridges the gap between tomato farmers and buyers. The app features AI-powered plant disease detection, tomato quality assessment, farm discovery.
 
